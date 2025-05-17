@@ -3,7 +3,6 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-blue)
-[![Kaggle](https://img.shields.io/badge/Kaggle-Profile-blue.svg)](https://www.kaggle.com/code/fatiherencetin/telco-customer-churn)
 
 ## 📌 Project Description
 
@@ -13,13 +12,13 @@ Inspired by a real business case from Gezinomi, the project uses a dataset conta
 
 ---
 
-## 📊 Dataset Overview
+## 📚 Dataset Overview
 
 The dataset contains the following fields:
 
 | Feature              | Description                                      |
 |----------------------|--------------------------------------------------|
-| `SaleId`             | Unique sale ID                                          |
+| `SaleId`             | Unique sale ID                                   |
 | `SaleDate`           | Date of sale                                     |
 | `CheckInDate`        | Customers' checkin date to hotel                 |
 | `Price`              | Paid price for the booking                       |
@@ -49,15 +48,15 @@ The key business questions addressed:
 1. **Data Exploration and Cleaning**
 2. **Time Window Categorization**:  
    `SaleCheckInDayDiff → EB_Score` with labels:  
-   - `Last Minuters`: 0–7  
-   - `Potential Planners`: 8–30  
+   - `Last_Minuters`: 0–7  
+   - `Potential_Planners`: 8–30  
    - `Planners`: 31–90  
-   - `Early Birds`: 91-180
+   - `Early_Birds`: 91-180
    - `Promotioners`: >180
 3. **Aggregations**:
    - Mean price and count for grouped attributes
 4. **Level-Based Persona Creation**:
-   - Concatenated columns: `City_Concept_Season`
+   - Concatenated columns: `City`, `ConceptName` and `Season` as `sales_level_based`
 5. **Segmentation**:
    - Based on quartiles of `Price`
 6. **Prediction Example Queries**:
@@ -65,13 +64,39 @@ The key business questions addressed:
 
 ---
 
+
+## 📊 Segment Summary Table
+
+After assigning customer personas to segments (A–D) based on average `Price`, we summarized each segment's financial characteristics:
+
+| Segment | Avg. Value | Min. Value | Max. Value | Total Value |
+|---------|------------|------------|------------|--------------|
+| A       | 110.15     | 77.96      | 4880.47    | 1.628840e+06 |
+| B       | 64.97      | 54.26      | 77.96      | 9.607300e+05 |
+| C       | 44.59      | 35.34      | 54.26      | 6.596030e+05 |
+| D       | 25.65      | 0          | 35.34      | 3.794480e+05 |
+
+> These results allow decision-makers to understand the revenue potential and variability within each segment, helping to optimize marketing and targeting strategies.
+
+---
+
+## 🔍 Estimating Profitability for New Customers
+
+The project includes a utility function called `estimate_segment_value()` that allows you to simulate the expected profitability of any new customer based on their persona string (e.g., `"ANTALYA_HERŞEY DAHIL_HIGH"`).
+
+### 🧪 Sample Usage
+
+```python
+segment, estimate_df = estimate_segment_value(agg_df, "antalya_herşey dahil_low") # Enter `persona` as your desire.
+```
+
 ## 📈 Sample Output
 
-| Persona                          | Segment | Avg. Price |
-|----------------------------------|---------|------------|
-| ANTALYA_HERŞEY DAHIL_HIGH        | A       | 103.94     |
-| GIRNE_YARIM PANSIYON_LOW         | C       | 75.80      |
-| DİĞER_HERŞEY DAHIL_LOW           | B       | 87.31      |
+```python
+ANTALYA_HERŞEY DAHIL_LOW: 
+   Segment   Avg_Value  Min_Value   Max_Value   Total_Value
+3       A  110.153543  77.962578  4880.47138  1.628840e+06
+```
 
 ---
 
@@ -87,6 +112,8 @@ The key business questions addressed:
 ## 📄 License
 
 MIT License. See `LICENSE` file for details.
+
+Feel free to contribute to this project by submitting issues or pull requests. Your contributions are welcome!
 
 ---
 
