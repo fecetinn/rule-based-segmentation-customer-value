@@ -104,7 +104,6 @@ ANTALYA_HERŞEY DAHIL_LOW:
 
 - Python
 - Pandas
-- Jupyter Notebook
 - Rule-Based Business Logic
 
 ---
